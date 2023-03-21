@@ -19,8 +19,9 @@ from students.routes import students
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
+app.config['SECRET_KEY'] = 'your-secret-key-here'
 app.config.from_object(DevelopmentConfig)
-csrf=CSRFProtect(app)
+
 
 
 
@@ -33,7 +34,6 @@ app.register_blueprint(students)
 
 if __name__ == '__main__':
     
-    csrf.init_app(app)
     db.init_app(app)
     with app.app_context():
         db.create_all()

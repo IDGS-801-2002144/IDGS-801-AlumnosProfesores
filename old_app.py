@@ -11,7 +11,8 @@ from db.models import Alumnos
 
 app=Flask(__name__)
 app.config.from_object(DevelopmentConfig)
-csrf=CSRFProtect()
+app.config['SECRET_KEY'] = 'your-secret-key-here'
+csrf=CSRFProtect(app)
 
 
 @app.route("/", methods = ["GET","POST"])

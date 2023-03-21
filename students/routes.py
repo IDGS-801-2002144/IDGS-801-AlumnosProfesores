@@ -27,6 +27,7 @@ from students import forms
 
 students = Blueprint('students', __name__, template_folder='templates')
 
+
 @students.route('/get_students', methods=['GET', 'POST'])
 def get_students():
     create_form = forms.UserForm(request.form)
@@ -49,7 +50,7 @@ def insert_students():
     if request.method == 'POST' and create_form.validate():
         # Crear una nueva instancia del objeto Student con los datos del formulario
         new_student = Student(name=create_form.name.data, surname=create_form.surname.data,
-                              email=create_form.email.data, created_at=datetime.now())
+                              email=create_form.email.data, created_date=datetime.now())
         # Agregar la nueva instancia a la sesión y guardar los cambios
         db.session.add(new_student)
         db.session.commit()
