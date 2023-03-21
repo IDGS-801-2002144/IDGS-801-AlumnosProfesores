@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+ 
+{% block content%}
+   {% from "_macros.html" import render_field %}
+ 
+   <div class="container">
+      <div class="row">
+         <h2>Profesores IDGS-801</h2>
+         <a href="/insert_teachers" class="btn btn-success"><i class="icon-pencil icon-white"></i>Agregar</a>
+
+
+         <form name="sent" action="/get_teachers" id="form1" method="POST">
+            <div class="row control-group">
+                <div class="form-group col-xs-12 float-label-form-group controls">
+                    {{render_field(form.id,class='form-control')}}
+                </div>
+            </div>
+            <input type="submit" id="search_teachers" name="search" value="Buscar"/>
+        </form>
+         
+         <table>
+            <thead>
+               <tr class="tr-head">
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Apellidos</th>
+                  <th>Correo</th>
+                  <th>Fecha de creacion</th>
+                  <th>Eliminar </th>
+                  <th>Modificar</th>
+               </tr>
+            </thead>
+            <tbody>
+               {% for teacher in teachers %}
+               <tr>
+                  <td>{{ teacher.id }}</td>
+                  <td>{{ teacher.name }}</td>
+                  <td>{{ teacher.surname }}</td>
+                  <td>{{ teacher.email }}</td>
+                  <td>{{ teacher.created_date }}</td>
+                  <td>
+                     <a href="delete_teachers?id={{ teacher.id }}" class="btn btn-danger">
+                        <i class="icon-remove icon-white"></i>Eliminar
+                     </a>
+                  </td>
+                  <td>
+                     <a href="/update_teachers?id={{ teacher.id }}" class="btn btn-warning">
+                        <i class="icon-pencil icon-white"></i>Modificar
+                     </a>
+                  </td>
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+   </div>
+
+{% endblock %}
